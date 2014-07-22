@@ -22,6 +22,7 @@ import scala.util.Try
 import scala.xml.XML
 
 import Keys._
+import Keys.Internal._
 import Tasks._
 import Commands._
 

@@ -38,8 +38,6 @@ object Keys {
   type LibraryProject = Dependencies.LibraryProject
   val LibraryProject = Dependencies.LibraryProject
 
-  val ilogger = SettingKey[Logger => ILogger]("ilogger",
-    "internal Android SDK logger")
   // build-environment keys
   val platformTarget = SettingKey[String]("platform-target",
     "target API level as described by 'android list targets' (the ID string)")

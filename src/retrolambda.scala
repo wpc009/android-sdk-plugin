@@ -15,7 +15,7 @@ object RetrolambdaSupport {
               s: sbt.Keys.TaskStreams): File = synchronized {
     import collection.JavaConversions._
     val e = Project.extract(st)
-    val bldr = e.runTask(Keys.builder in (prj,Keys.Android), st)._2
+    val bldr = e.runTask(Keys.Internal.builder in (prj,Keys.Android), st)._2
     val cp = (bldr.getBootClasspath map (f => f: sbt.File)) ++ classpath
     val dest = target / "retrolambda"
     val finalJar = target / "retrolambda-processed.jar"

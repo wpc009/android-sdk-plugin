@@ -1,7 +1,7 @@
 import ScriptedPlugin._
 import bintray.Keys._
 
-val pluginVersion = "1.5.6-SNAPSHOT"
+val pluginVersion = "1.5.6-C-SNAPSHOT"
 val gradleBuildVersion = "1.1.5-SNAPSHOT"
 
 // gradle-plugin and gradle-model projects
@@ -107,7 +107,7 @@ libraryDependencies ++= Seq(
   "org.javassist" % "javassist" % "3.20.0-GA",
   "net.sf.proguard" % "proguard-base" % "5.0",
   "com.hanhuy.sbt" %% "bintray-update-checker" % "0.1",
-  "com.android.tools.build" % "builder" % "1.3.1",
+  "com.android.tools.build" % "builder" % "1.3.1-C",
   "com.android.tools.build" % "gradle-core" % "1.3.1" excludeAll
     ExclusionRule(organization = "net.sf.proguard"),
   "com.android.tools.lint" % "lint" % "24.3.1",
@@ -129,11 +129,23 @@ buildInfoKeys := Seq(name, version, scalaVersion, sbtVersion)
 buildInfoPackage := "android"
 
 // bintray
-bintrayPublishSettings
+//bintrayPublishSettings
 
-repository in bintray := "sbt-plugins"
+//repository in bintray := "sbt-plugins"
 
-publishMavenStyle := false
+
+publishTo := {
+    if (isSnapshot.value)
+      Some("snapshots" at "http://artifactory.segmetics.com/artifactory/libs-snapshot-local")
+    else
+      Some("artifactory.segmetics.com-releases" at "http://artifactory.segmetics.com/artifactory/libs-release-local")
+  }
+
+
+credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
+
+
+publishMavenStyle := true
 
 licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
